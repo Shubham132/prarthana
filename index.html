@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prarthana</title>
+  <meta name="description" content="Ram Raksha Stotram, Hanuman Chalisa and Kal Bhairav Ashtakam in Devanagari with verse-by-verse English meanings and sing-along.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1 lang="hi">प्रार्थना</h1>
+    <nav class="tabs" role="tablist" aria-label="Choose a prayer" id="tabs"></nav>
+  </header>
+
+  <main id="main">
+    <section class="intro">
+      <h2 id="title" lang="hi"></h2>
+      <p class="byline" id="byline"></p>
+      <p id="intro"></p>
+      <div class="tools">
+        <button type="button" class="primary" id="sing">Sing along</button>
+        <div class="size" role="group" aria-label="Text size">
+          <button type="button" id="smaller" aria-label="Smaller text">A−</button>
+          <button type="button" id="larger" aria-label="Larger text">A+</button>
+        </div>
+      </div>
+      <p class="notice" id="notice" role="status" hidden></p>
+    </section>
+    <div id="verses"></div>
+  </main>
+
+  <div class="singbar" id="singbar" hidden>
+    <span class="dot" aria-hidden="true"></span>
+    <p class="heard"><span id="status">Listening…</span> <span id="heard" lang="hi"></span></p>
+    <button type="button" id="prev" aria-label="Previous line">↑</button>
+    <button type="button" id="next" aria-label="Next line">↓</button>
+    <button type="button" id="stop">Stop</button>
+  </div>
+
+  <footer class="site-footer">
+    <h2>About the text</h2>
+    <p>The Hanuman Chalisa is in Awadhi, a form of Hindi. The Ram Raksha Stotram and Kal Bhairav Ashtakam are in Sanskrit, written in the same Devanagari script.</p>
+    <p>Verses were compared across
+      <a href="https://sa.wikisource.org/wiki/रामरक्षास्तोत्रम्">Sanskrit Wikisource</a>,
+      <a href="https://shlokam.org/">Shlokam.org</a>,
+      <a href="https://vachmi.com/articles/Ramraksha.html">Vachmi</a> and
+      <a href="https://hindutone.com/">HinduTone</a>.
+      Recitation traditions differ slightly, so your family's version may vary by a word or two.
+      English meanings were written for this site and are a plain guide, not a scholarly translation.</p>
+    <p>Sing along uses your browser's speech recognition, which may send audio to your browser maker's servers while it is on. This site stores no audio.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="tracker.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
