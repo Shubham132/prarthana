@@ -402,8 +402,7 @@ const PRAYERS = [
     title: "श्री कालभैरवाष्टकम्",
     author: "Attributed to Adi Shankaracharya",
     language: "Sanskrit",
-    // The uploader has turned off embedding, so this one opens on YouTube.
-    video: { id: "BsEqI1NZA-E", embed: false },
+    video: { id: "9HRpmWILluU", source: "Uma Mohan", embed: true },
     intro:
       "Eight verses (“ashtakam”) to Kala Bhairava, the fierce form of Shiva who rules over time and guards the holy city of Kashi (Varanasi). Each verse closes with the same refrain: “I worship Kala Bhairava, lord of the city of Kashi.”",
     sections: [
