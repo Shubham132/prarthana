@@ -23,12 +23,19 @@
       <p id="intro"></p>
       <div class="tools">
         <button type="button" class="primary" id="sing">Sing along</button>
+        <button type="button" id="listen" aria-expanded="false" aria-controls="player">Listen</button>
+        <a class="button" id="youtube" target="_blank" rel="noopener" hidden>Listen on YouTube ↗</a>
+        <div class="script" role="group" aria-label="Show verses in">
+          <button type="button" id="script-hi" lang="hi">हिन्दी</button>
+          <button type="button" id="script-en">English</button>
+        </div>
         <div class="size" role="group" aria-label="Text size">
           <button type="button" id="smaller" aria-label="Smaller text">A−</button>
           <button type="button" id="larger" aria-label="Larger text">A+</button>
         </div>
       </div>
       <p class="notice" id="notice" role="status" hidden></p>
+      <div class="player" id="player" hidden></div>
     </section>
     <div id="verses"></div>
   </main>
@@ -51,11 +58,14 @@
       <a href="https://hindutone.com/">HinduTone</a>.
       Recitation traditions differ slightly, so your family's version may vary by a word or two.
       English meanings were written for this site and are a plain guide, not a scholarly translation.</p>
+    <p>The English view spells the same words in English letters, without the marks scholars use for exact pronunciation, so treat it as a reading aid.</p>
+    <p>Recordings are hosted on YouTube and belong to their channels. YouTube loads only after you press Listen.</p>
     <p>Sing along uses your browser's speech recognition, which may send audio to your browser maker's servers while it is on. This site stores no audio.</p>
   </footer>
 
   <script src="data.js"></script>
   <script src="tracker.js"></script>
+  <script src="romanize.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@ python3 -m http.server 8765
 ```
 
 - `data.js`: verses and meanings
+- `romanize.js`: shows the verses in English letters
 - `tracker.js`: follows the singer by fuzzy matching on consonants
 - `app.js`: page and speech recognition
 

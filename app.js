@@ -11,7 +11,9 @@ const prefs = {
 
 let active = PRAYERS[0];
 let lineEls = [];
+let lineTexts = [];
 let scale = Number(prefs.get("scale")) || 1;
+let script = prefs.get("script") === "en" ? "en" : "hi";
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -34,7 +36,6 @@ function renderTabs() {
 function renderPrayer(prayer) {
   active = prayer;
   document.title = `${prayer.tab} · Prarthana`;
-  $("title").textContent = prayer.title;
   $("byline").textContent = `${prayer.author} · ${prayer.language}`;
   $("intro").textContent = prayer.intro;
   for (const b of $("tabs").children) {
@@ -44,24 +45,92 @@ function renderPrayer(prayer) {
   const root = $("verses");
   root.replaceChildren();
   lineEls = [];
+  lineTexts = [];
   for (const section of prayer.sections) {
     root.append(el("h3", "section-heading", section.heading));
     for (const verse of section.verses) {
       const row = el("article", "verse");
-      row.append(el("span", "num", verse.n));
+      const num = el("span", "num");
+      num.dataset.n = verse.n;
+      row.append(num);
       const original = el("div", "original");
-      original.lang = "hi";
       for (const text of verse.lines) {
-        const line = el("span", "line", text);
+        const line = el("span", "line");
         const index = lineEls.length;
         line.addEventListener("click", () => { if (singing) moveTo(index); });
         original.append(line);
         lineEls.push(line);
+        lineTexts.push(text);
       }
       row.append(original, el("p", "meaning", verse.meaning));
       root.append(row);
     }
   }
+  renderPlayerControls(prayer);
+  applyScript();
+}
+
+function applyScript() {
+  const english = script === "en";
+  const options = { hindi: Boolean(active.hindi) };
+  const show = (text) => (english ? romanize(text, options) : text);
+  $("title").textContent = english ? active.tab : active.title;
+  $("title").lang = english ? "en" : "hi";
+  lineEls.forEach((line, i) => { line.textContent = show(lineTexts[i]); });
+  for (const box of document.querySelectorAll(".original")) {
+    box.lang = english ? "en" : "hi";
+    box.classList.toggle("latin", english);
+  }
+  for (const num of document.querySelectorAll(".num")) {
+    num.textContent = english ? romanize(num.dataset.n) : num.dataset.n;
+  }
+  $("script-hi").setAttribute("aria-pressed", String(!english));
+  $("script-en").setAttribute("aria-pressed", String(english));
+}
+
+function setScript(next) {
+  script = next;
+  prefs.set("script", script);
+  applyScript();
+}
+
+function renderPlayerControls(prayer) {
+  const { embed, id } = prayer.video;
+  closePlayer();
+  $("listen").hidden = !embed;
+  $("youtube").hidden = embed;
+  $("youtube").href = `https://www.youtube.com/watch?v=${id}`;
+}
+
+function closePlayer() {
+  $("player").replaceChildren();
+  $("player").hidden = true;
+  $("listen").textContent = "Listen";
+  $("listen").setAttribute("aria-expanded", "false");
+}
+
+function togglePlayer() {
+  if (!$("player").hidden) {
+    closePlayer();
+    return;
+  }
+  const { id, source } = active.video;
+  const frame = el("iframe");
+  frame.title = `${active.tab} recording`;
+  frame.allow = "autoplay; encrypted-media; picture-in-picture";
+  frame.allowFullscreen = true;
+  frame.referrerPolicy = "strict-origin-when-cross-origin";
+  frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+  const credit = el("p", "", `Recording from ${source}. `);
+  const link = el("a", "", "Open on YouTube");
+  link.href = `https://www.youtube.com/watch?v=${id}`;
+  link.target = "_blank";
+  link.rel = "noopener";
+  credit.append(link);
+  $("player").replaceChildren(frame, credit);
+  $("player").hidden = false;
+  $("listen").textContent = "Hide player";
+  $("listen").setAttribute("aria-expanded", "true");
 }
 
 function route() {
@@ -118,7 +187,7 @@ function startSinging() {
   }
   notice("");
   singing = true;
-  tracker = new Tracker(lineEls.map((line) => line.textContent));
+  tracker = new Tracker(lineTexts);
   shown = -1;
   document.body.classList.add("singing");
   $("singbar").hidden = false;
@@ -181,6 +250,9 @@ renderTabs();
 setScale(scale);
 $("sing").addEventListener("click", startSinging);
 $("stop").addEventListener("click", stopSinging);
+$("listen").addEventListener("click", togglePlayer);
+$("script-hi").addEventListener("click", () => setScript("hi"));
+$("script-en").addEventListener("click", () => setScript("en"));
 $("prev").addEventListener("click", () => moveTo(tracker.index - 1));
 $("next").addEventListener("click", () => moveTo(tracker.index + 1));
 $("smaller").addEventListener("click", () => setScale(scale - 0.1));

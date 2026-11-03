@@ -35,6 +35,20 @@ button {
   min-height: 44px;
 }
 
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.button[hidden] { display: none; }
+
 button:focus-visible, a:focus-visible, .line:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .site-header {
@@ -92,7 +106,17 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 16px 48px; }
 
 .primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; padding: 8px 20px; }
 
-.size { display: flex; gap: 4px; }
+.size, .script { display: flex; gap: 4px; }
+
+.script button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+.player { margin-top: 16px; }
+
+.player[hidden] { display: none; }
+
+.player iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 8px; background: #000; }
+
+.player p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
 
 .notice { margin: 12px 0 0; padding: 10px 14px; background: var(--glow); border-radius: 8px; font-size: 15px; }
 
@@ -118,6 +142,8 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 16px 48px; }
 .num { color: var(--muted); font: 400 15px/2 "Noto Serif Devanagari", serif; }
 
 .original { font: 400 calc(21px * var(--scale))/1.85 "Noto Serif Devanagari", serif; }
+
+.original.latin { font-family: "Source Serif 4", Georgia, serif; line-height: 1.65; }
 
 .line {
   display: block;

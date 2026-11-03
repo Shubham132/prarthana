@@ -7,6 +7,7 @@ const PRAYERS = [
     title: "श्री राम रक्षा स्तोत्रम्",
     author: "Budha Kaushika",
     language: "Sanskrit",
+    video: { id: "3wZrXQJbqbU", source: "Devotional", embed: true },
     intro:
       "A hymn of protection. Tradition says Shiva recited it to the sage Budha Kaushika in a dream, and he wrote it down on waking. Its central verses ask Rama, under a different name each time, to guard each part of the body.",
     sections: [
@@ -315,6 +316,8 @@ const PRAYERS = [
     title: "श्री हनुमान चालीसा",
     author: "Goswami Tulsidas",
     language: "Awadhi (a form of Hindi)",
+    hindi: true,
+    video: { id: "AETFvQonfV8", source: "T-Series Bhakti Sagar", embed: true },
     intro:
       "Forty verses (“chalisa” means forty) in praise of Hanuman, the devoted servant of Rama, framed by couplets called dohas. Tulsidas, the author of the Ramcharitmanas, composed it in the 16th century.",
     sections: [
@@ -399,6 +402,8 @@ const PRAYERS = [
     title: "श्री कालभैरवाष्टकम्",
     author: "Attributed to Adi Shankaracharya",
     language: "Sanskrit",
+    // The uploader has turned off embedding, so this one opens on YouTube.
+    video: { id: "BsEqI1NZA-E", embed: false },
     intro:
       "Eight verses (“ashtakam”) to Kala Bhairava, the fierce form of Shiva who rules over time and guards the holy city of Kashi (Varanasi). Each verse closes with the same refrain: “I worship Kala Bhairava, lord of the city of Kashi.”",
     sections: [
